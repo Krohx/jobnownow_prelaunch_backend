@@ -53,7 +53,6 @@ class Config():
     #DB_URI = os.path.join(BASE_URI, '.jobnownow_website_data.sqlite')
     #SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DB_URI
     DB_HOST = os.environ.get('MYSQL_HOST')
-    print
     DB_USER = os.environ.get('MYSQL_UNAME')
     DB_PWD = os.environ.get('MYSQL_PWD')
     DB_NAME = os.environ.get('MYSQL_NAME')

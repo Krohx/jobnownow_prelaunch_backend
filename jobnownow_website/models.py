@@ -21,8 +21,8 @@ class Subscription(db.Model):
     __tablename__ = 'subscriptions'
 
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String, default='no_email', nullable=True, unique=False)
-    datetime = db.Column(db.String, default=datetime.utcnow, unique=False)
+    email = db.Column(db.String(512), default='no_email', nullable=True, unique=False)
+    datetime = db.Column(db.String(512), default=datetime.utcnow, unique=False)
 
 
 class InvalidSub(db.Model):
@@ -30,5 +30,5 @@ class InvalidSub(db.Model):
     __tablename__ = 'invalid_subs'
 
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String, default='no_email', nullable=True, unique=False)
-    datetime = db.Column(db.String, default=datetime.utcnow, unique=False)
+    email = db.Column(db.String(512), default='no_email', nullable=True, unique=False)
+    datetime = db.Column(db.String(512), default=datetime.utcnow, unique=False)
