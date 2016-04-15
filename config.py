@@ -46,32 +46,19 @@ class Config():
     DEBUG = False
     TESTING = False
     WTF_CSRF_ENABLED = True
-    SECRET_KEY = os.environ.get('CSRF_SESSION_SECRET_KEY') or \
-        'ns984hoa0hfa908hw4fa045gf0angvajwfvpafzsdjnafpw4gtandgfvawtngarginf'
-    SECURITY_PASSWORD_SALT = os.environ.get('SECURITY_PASSWORD_SALT') or \
-        'vpafpw4gfzsrginf908hw4dj043henf0h03nwtngafa045gfangvajwaa0vaftandgf'
+    SECRET_KEY = os.environ.get('CSRF_SESSION_SECRET_KEY')
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     THREADS_PER_PAGE = 2    
     APP_NAME = APP_NAME
-    DB_URI = os.path.join(BASE_URI, '.jobnownow_website_data.sqlite')
+    #DB_URI = os.path.join(BASE_URI, '.jobnownow_website_data.sqlite')
     #SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DB_URI
     DB_HOST = os.environ.get('MYSQL_HOST')
+    print
     DB_USER = os.environ.get('MYSQL_UNAME')
     DB_PWD = os.environ.get('MYSQL_PWD')
     DB_NAME = os.environ.get('MYSQL_NAME')
     SQLALCHEMY_DATABASE_URI = 'mysql://'+DB_USER+':'+DB_PWD+'@'+DB_HOST+'/'+DB_NAME
     APP_STATIC_DATA_URI = os.path.join(BASE_URI, APP_NAME, 'data')
-
-    # email specifics
-    MAIL_DEFAULT_SENDER = 'pythonflask@yahoo.com'
-    MAIL_SERVER = 'smtp.mail.yahoo.com'
-    MAIL_PORT = 587
-    MAIL_USE_TLS = True
-    MAIL_USE_SSL = False
-
-    # gmail authentication
-    MAIL_USERNAME = os.environ.get('APP_MAIL_USERNAME')
-    MAIL_PASSWORD = os.environ.get('APP_MAIL_PASSWORD')
 
     @staticmethod
     def init_app(app, *args):
