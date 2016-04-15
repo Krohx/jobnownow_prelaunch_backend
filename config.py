@@ -54,7 +54,12 @@ class Config():
     THREADS_PER_PAGE = 2    
     APP_NAME = APP_NAME
     DB_URI = os.path.join(BASE_URI, '.jobnownow_website_data.sqlite')
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DB_URI
+    #SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DB_URI
+    DB_HOST = os.environ.get('MYSQL_HOST')
+    DB_USER = os.environ.get('MYSQL_UNAME')
+    DB_PWD = os.environ.get('MYSQL_PWD')
+    DB_NAME = os.environ.get('MYSQL_NAME')
+    SQLALCHEMY_DATABASE_URI = 'mysql://'+DB_USER+':'+DB_PWD+'@'+DB_HOST+'/'+DB_NAME
     APP_STATIC_DATA_URI = os.path.join(BASE_URI, APP_NAME, 'data')
 
     # email specifics
