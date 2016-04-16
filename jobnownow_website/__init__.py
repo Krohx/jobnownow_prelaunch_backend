@@ -37,19 +37,22 @@ db = SQLAlchemy(app)
 
 import db_ops # to avoid issue around circular imports
 
+HOME_URL = 'http://jobnownow.com/'
 REDIRECT_URL = 'http://jobnownow.com/thankyou.html'
 
 
 @app.route('/index/')
 @app.route('/')
 def index():
-    return redirect(REDIRECT_URL)
+    return redirect(HOME_URL)
 
 
 @app.route('/subscribe/<email>/')
 def subscribe(email=''):
     
+    print email
     if validate_email(email):
+
         db_ops.insert_val(db_ops.Subscription, dict(email=email))
         print "Registered!"
     else:
@@ -64,6 +67,7 @@ def subscribe_form():
     form = request.form
     email = form['email'].decode('utf-8')
 
+    print email
     if validate_email(email):
         db_ops.insert_val(db_ops.Subscription, dict(email=email))
         print "Registered!"

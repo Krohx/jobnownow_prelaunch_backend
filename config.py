@@ -60,8 +60,8 @@ class Config():
     APP_STATIC_DATA_URI = os.path.join(BASE_URI, APP_NAME, 'data')
 
     # Workaround for MySQL disconnects
-    app.config['SQLALCHEMY_POOL_SIZE'] = 100
-    app.config['SQLALCHEMY_POOL_RECYCLE'] = 280
+    SQLALCHEMY_POOL_SIZE = 100
+    SQLALCHEMY_POOL_RECYCLE = 280
 
 class DevConfig(Config):
 
