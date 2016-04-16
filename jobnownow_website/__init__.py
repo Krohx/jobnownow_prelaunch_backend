@@ -10,6 +10,9 @@ for when the JobNowNow app launches.
 :license: see LICENSE for details.
 """
 
+# standard lib imports
+import os
+
 # library imports
 from flask import Flask
 from flask.ext.bootstrap import Bootstrap
@@ -17,12 +20,16 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask import redirect, request
 
 # local imports
-from config import Config
+from config import Config, DevConfig
 
-
+#export JOBNOWNOW_EMAIL_CFG=dev
 app = Flask(__name__)
-app.config.from_object(Config)
-app.config['DEBUG'] = False
+cfg = os.getenv('JOBNOWNOW_EMAIL_CFG') 
+
+if cfg is None or cfg != 'dev':
+    app.config.from_object(Config)
+else:
+    app.config.from_object(DevConfig)
 
 # Instantiate Flask extensions
 bootstrap = Bootstrap(app)
@@ -84,3 +91,26 @@ def validate_email(email):
 if __name__ == '__main__':
     db.create_all()
     app.run()
+
+
+
+
+
+# from flask_slack import Slack
+
+# subs = db_ops.ret_all(db_ops.Subscription)
+# emails = [sub.email for sub in subs]
+
+# slack = Slack(app)
+
+
+
+# @slack.command('bot_test', token=app.config['SLACK_TOKEN'], methods=['POST'])
+# def action(**kwargs):
+#     text = kwargs.get('text')
+#     return slack.response('New subscriber: %r' %)
+
+# app.add_url_rule('/subscribe/', view_func=slack.dispatch)
+
+
+

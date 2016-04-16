@@ -59,12 +59,12 @@ class Config():
     SQLALCHEMY_DATABASE_URI = 'mysql://'+DB_USER+':'+DB_PWD+'@'+DB_HOST+'/'+DB_NAME
     APP_STATIC_DATA_URI = os.path.join(BASE_URI, APP_NAME, 'data')
 
-    @staticmethod
-    def init_app(app, *args):
-        """
-        Method to initialize instances of Flask extensions passed in as
-        a list of parameters.
-        """
-        for flask_extension in args:
-            flask_extension.init_app(app)
+    # Workaround for MySQL disconnects
+    app.config['SQLALCHEMY_POOL_SIZE'] = 100
+    app.config['SQLALCHEMY_POOL_RECYCLE'] = 280
 
+class DevConfig(Config):
+
+    DB_URI = os.path.join(BASE_URI, '.jobnownow_website_data.sqlite')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DB_URI
+    SLACK_TOKEN = os.getenv('SLACK_TOKEN')
