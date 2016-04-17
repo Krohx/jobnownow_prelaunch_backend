@@ -78,6 +78,15 @@ def subscribe_form():
     return redirect(REDIRECT_URL)
 
 
+@app.errorhandler(500)
+def server_error(error):
+    return redirect(url_for(REDIRECT_URL)), 500
+
+@app.errorhandler(404)
+def _404(error):
+    return redirect(url_for(REDIRECT_URL)), 404
+
+
 # `validate_email` snippet from online
 def validate_email(email):
     sep=[x for x in email if not x.isalpha()]
