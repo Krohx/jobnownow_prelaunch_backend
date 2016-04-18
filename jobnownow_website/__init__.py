@@ -58,10 +58,10 @@ def subscribe(email=''):
     if validate_email(email):
 
         db_ops.insert_val(db_ops.Subscription, dict(email=email))
-        print "Registered!"
+        print "URL Email Registered!"
     else:
         db_ops.insert_val(db_ops.InvalidSub, dict(email=email))
-        print "Failed!"
+        print "URL Email Failed!"
 
     return redirect(REDIRECT_URL)
 
@@ -74,10 +74,10 @@ def subscribe_form():
     print email
     if validate_email(email):
         db_ops.insert_val(db_ops.Subscription, dict(email=email))
-        print "Registered!"
+        print "Form Email Registered!"
     else:
         db_ops.insert_val(db_ops.InvalidSub, dict(email=email))
-        print "Failed!"
+        print "Form Email Failed!"
 
     return redirect(REDIRECT_URL)
 
