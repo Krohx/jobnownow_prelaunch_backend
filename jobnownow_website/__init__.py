@@ -18,6 +18,7 @@ from flask import Flask
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask import redirect, request
+from lepl.apps.rfc3696 import Email # for email validation
 
 # local imports
 from config import Config, DevConfig
@@ -34,6 +35,9 @@ else:
 # Instantiate Flask extensions
 bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
+
+# email validator
+validator = Email()
 
 import db_ops # to avoid issue around circular imports
 
@@ -87,17 +91,20 @@ def _404(error):
     return redirect(url_for(REDIRECT_URL)), 404
 
 
-# `validate_email` snippet from online
 def validate_email(email):
-    sep=[x for x in email if not x.isalpha()]
-    sepjoined=''.join(sep)
-    ## sep joined must be ..@.... form
-    if sepjoined.strip('.') != '@': return False
-    end=email
-    for i in sep:
-        part,i,end=end.partition(i)
-        if len(part)<2: return False
-    return True
+    return validator(email)
+
+# # `validate_email` snippet from online
+# def validate_email(email):
+#     sep=[x for x in email if not x.isalpha()]
+#     sepjoined=''.join(sep)
+#     ## sep joined must be ..@.... form
+#     if sepjoined.strip('.') != '@': return False
+#     end=email
+#     for i in sep:
+#         part,i,end=end.partition(i)
+#         if len(part)<2: return False
+#     return True
 
 
 
